@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.javaguides.maven-web-project</groupId>
+  <artifactId>DilcaDistanceDiffPriv</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>DilcaDistanceDiffPriv</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <maven.compiler.source>1.8</maven.compiler.source> <!-- For Java 11: use "11"-->
+        <maven.compiler.target>1.8</maven.compiler.target> <!-- For Java 11: use "11"-->
+
+        <weka.version>3.8.3</weka.version>
+    
+  </properties>
+  
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-stable</artifactId>
+      <version>${weka.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-dev</artifactId>
+      <version>[3.7.1,)</version>
+    </dependency>
+
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-dev</artifactId>
+      <version>[3.7.1,)</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>fastCorrBasedFS</artifactId>
+      <version>[1.0.1,)</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.github.haifengl</groupId>
+      <artifactId>smile-core</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    
+    <dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-configuration2</artifactId>
+ 	 	<version>2.7</version>
+	</dependency>
+	
+	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava</artifactId>
+  		<version>29.0-jre</version>
+	</dependency>
+	
+	<dependency>
+   		<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-math3</artifactId>
+    	<version>3.2</version>
+	</dependency>
+  
+  </dependencies>
+  
+  
+</project>
