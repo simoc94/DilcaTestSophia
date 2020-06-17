@@ -26,7 +26,6 @@ public class TestMancanti {
 		filter.setAttributeIndices(""+(data.classIndex()+1));
 		filter.setInputFormat(data);
 		cpu = Filter.useFilter(data, filter);
-		
 	    String s = "../src/main/java/Test/mushroom.arff";
 	    int[] classe = new int[0];
 	    classe = BalloonNMISoloDilcaTestSuClasseDataset.loadArffClasse(s);
