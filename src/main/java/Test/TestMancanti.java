@@ -19,7 +19,7 @@ public class TestMancanti {
 	
 	public static void mushroomAriMatriciInizialiMean() throws Exception {
 		Instances cpu = null;
-		DataSource source = new DataSource("/home/Celano/Desktop/mushroom");
+		DataSource source = new DataSource("/home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
@@ -27,7 +27,7 @@ public class TestMancanti {
 		filter.setInputFormat(data);
 		cpu = Filter.useFilter(data, filter);
 		
-	    String s = "/home/Celano/Desktop/mushroom";
+	    String s = "/home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff";
 	    int[] classe = new int[0];
 	    classe = BalloonNMISoloDilcaTestSuClasseDataset.loadArffClasse(s);
 	    double epsilon = 0.0;
@@ -36,7 +36,7 @@ public class TestMancanti {
 	    for(int sig = 0; sig<10;sig++) {
 	    	sigma = sigma + 0.1;
 	    	epsilon = 0.0;
-	    	FileWriter writer1 = new FileWriter("home/Celano/test_mushroom_ari_matrini_mean/MushroomMatrIniMean1Sigma"+sigma+"ARI.txt", true);
+	    	FileWriter writer1 = new FileWriter("home/celano/test_mushroom_ari_matrini_mean/MushroomMatrIniMean1Sigma"+sigma+"ARI.txt", true);
 	    	for(int ciclo = 1; ciclo<10; ciclo++) {
 			rand.setSeed(11235813);
 			epsilon = epsilon+0.1;
@@ -46,7 +46,7 @@ public class TestMancanti {
 				DilcaDistanceContTableMean dd = new DilcaDistanceContTableMean(epsilon/(binomialCoeff(cpu.numAttributes(), 2)),sigma, rand.nextLong());
 				System.out.println("*******************************************");
 				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("/home/Celano/Desktop/mushroom");
+				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
 				AdjustedRandIndex nnn = new AdjustedRandIndex();
 				double value = nnn.measure(classe, classCluster);
@@ -65,7 +65,7 @@ public class TestMancanti {
 		 for(int sig = 0; sig<10;sig++) {
 	        	sigma = sigma + 0.1;
 	        	epsilon = 0.5;
-				FileWriter writer2 = new FileWriter("home/Celano/test_mushroom_ari_matrini_mean/MushroomMatrIniMean2Sigma"+sigma+"ARI.txt", true);
+				FileWriter writer2 = new FileWriter("home/celano/test_mushroom_ari_matrini_mean/MushroomMatrIniMean2Sigma"+sigma+"ARI.txt", true);
 				for(int ciclo = 1; ciclo<10; ciclo++) {
 					rand.setSeed(11235813);
 					epsilon = epsilon+0.5;
@@ -75,7 +75,7 @@ public class TestMancanti {
 						DilcaDistanceContTableMean dd = new DilcaDistanceContTableMean(epsilon/(binomialCoeff(cpu.numAttributes(), 2)),sigma, rand.nextLong());
 						System.out.println("*******************************************");
 						BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-						BalloonNMISoloDilcaTestSuClasseDataset.loadArff("/home/Celano/Desktop/mushroom");
+						BalloonNMISoloDilcaTestSuClasseDataset.loadArff("home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 						int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
 						AdjustedRandIndex nnn = new AdjustedRandIndex();
 						double value = nnn.measure(classe, classCluster);
@@ -95,14 +95,14 @@ public class TestMancanti {
 	
 	public static void mushroomARISUMean() throws Exception {
 		Instances cpu = null;
-		DataSource source = new DataSource("/home/Celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
+		DataSource source = new DataSource("/home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
 		filter.setAttributeIndices(""+(data.classIndex()+1));
 		filter.setInputFormat(data);
 		cpu = Filter.useFilter(data, filter);
-	    String s = "/home/Celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff";
+	    String s = "/home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff";
 	    int[] classe = new int[0];
 	    classe = BalloonNMISoloDilcaTestSuClasseDataset.loadArffClasse(s);
 	    double epsilon = 0.0;
@@ -111,7 +111,7 @@ public class TestMancanti {
 	    for(int sig = 0; sig<10;sig++) {
 	    	sigma = sigma + 0.1;
 	    	epsilon = 0.0;
-	    FileWriter writer1 = new FileWriter("home/Celano/test_mushroom_ari_matrini_mean/MushroomSUFinalDistMean1Sigma"+sigma+"ARI.txt", true);
+	    FileWriter writer1 = new FileWriter("home/celano/test_mushroom_ari_matrini_mean/MushroomSUFinalDistMean1Sigma"+sigma+"ARI.txt", true);
 		for(int ciclo = 1; ciclo<10; ciclo++) {
 			rand.setSeed(11235813);
 			epsilon = epsilon+0.1;
@@ -121,7 +121,7 @@ public class TestMancanti {
 				DilcaDistanceDiffPrivMeanWithFinalDistance dd = new DilcaDistanceDiffPrivMeanWithFinalDistance((0.5*epsilon/(cpu.numAttributes()+binomialCoeff(cpu.numAttributes(), 2))),(0.5*epsilon/(binomialCoeff(cpu.numAttributes(), 2))),sigma, rand.nextLong());
 				System.out.println("*******************************************");
 				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("/home/Celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
+				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("/home/celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
 				AdjustedRandIndex nnn = new AdjustedRandIndex();
 				double value = nnn.measure(classe, classCluster);
@@ -139,7 +139,7 @@ public class TestMancanti {
 		 for(int sig = 0; sig<10;sig++) {
 	        	sigma = sigma + 0.1;
 	        	epsilon = 0.5;
-				FileWriter writer2 = new FileWriter("home/Celano/test_mushroom_ari_matrini_mean/MushroomSUFinalDistMean2Sigma"+sigma+"ARI.txt", true);
+				FileWriter writer2 = new FileWriter("home/celano/test_mushroom_ari_matrini_mean/MushroomSUFinalDistMean2Sigma"+sigma+"ARI.txt", true);
 				for(int ciclo = 1; ciclo<10; ciclo++) {
 					rand.setSeed(11235813);
 					epsilon = epsilon+0.5;
