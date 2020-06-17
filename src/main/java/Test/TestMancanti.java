@@ -18,7 +18,7 @@ public class TestMancanti {
 	
 	public static void mushroomAriMatriciIniziali() throws Exception {
 		Instances cpu = null;
-		DataSource source = new DataSource("mushroom.arff");
+		DataSource source = new DataSource("/home/Celano/mushroom.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
@@ -35,7 +35,7 @@ public class TestMancanti {
 	    for(int sig = 0; sig<10;sig++) {
 	    	sigma = sigma + 0.1;
 	    	epsilon = 0.0;
-	    	FileWriter writer1 = new FileWriter("C:\\Users\\Simone\\Desktop\\Sophia\\MushroomMatrIniMean1Sigma"+sigma+"ARI.txt", true);
+	    	FileWriter writer1 = new FileWriter("home/Celano/test_mushroom_ari_matrini_mean/MushroomMatrIniMean1Sigma"+sigma+"ARI.txt", true);
 	    	for(int ciclo = 1; ciclo<10; ciclo++) {
 			rand.setSeed(11235813);
 			epsilon = epsilon+0.1;
@@ -64,7 +64,7 @@ public class TestMancanti {
 		 for(int sig = 0; sig<10;sig++) {
 	        	sigma = sigma + 0.1;
 	        	epsilon = 0.5;
-				FileWriter writer2 = new FileWriter("C:\\Users\\Simone\\Desktop\\Sophia\\MushroomMatrIniMean2Sigma"+sigma+"ARI.txt", true);
+				FileWriter writer2 = new FileWriter("home/Celano/test_mushroom_ari_matrini_mean/MushroomMatrIniMean2Sigma"+sigma+"ARI.txt", true);
 				for(int ciclo = 1; ciclo<10; ciclo++) {
 					rand.setSeed(11235813);
 					epsilon = epsilon+0.5;
