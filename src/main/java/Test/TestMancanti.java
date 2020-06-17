@@ -18,7 +18,7 @@ public class TestMancanti {
 	
 	public static void mushroomAriMatriciIniziali() throws Exception {
 		Instances cpu = null;
-		DataSource source = new DataSource("/home/Celano/mushroom.arff");
+		DataSource source = new DataSource("/home/Celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
@@ -45,7 +45,7 @@ public class TestMancanti {
 				DilcaDistanceContTableMean dd = new DilcaDistanceContTableMean(epsilon/(binomialCoeff(cpu.numAttributes(), 2)),sigma, rand.nextLong());
 				System.out.println("*******************************************");
 				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("mushroom.arff");
+				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("home/Celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
 				AdjustedRandIndex nnn = new AdjustedRandIndex();
 				double value = nnn.measure(classe, classCluster);
@@ -74,7 +74,7 @@ public class TestMancanti {
 						DilcaDistanceContTableMean dd = new DilcaDistanceContTableMean(epsilon/(binomialCoeff(cpu.numAttributes(), 2)),sigma, rand.nextLong());
 						System.out.println("*******************************************");
 						BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-						BalloonNMISoloDilcaTestSuClasseDataset.loadArff("mushroom.arff");
+						BalloonNMISoloDilcaTestSuClasseDataset.loadArff("home/Celano/Desktop/DilcaTestSophia/src/main/java/Test/mushroom.arff");
 						int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
 						AdjustedRandIndex nnn = new AdjustedRandIndex();
 						double value = nnn.measure(classe, classCluster);
