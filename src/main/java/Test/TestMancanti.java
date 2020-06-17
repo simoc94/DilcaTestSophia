@@ -19,7 +19,7 @@ public class TestMancanti {
 	
 	public static void mushroomAriMatriciInizialiMean() throws Exception {
 		Instances cpu = null;
-		DataSource source = new DataSource("/DilcaTestSophia/src/main/java/Test/mushroom.arff");
+		DataSource source = new DataSource("DilcaTestSophia/src/main/java/Test/mushroom.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
@@ -27,7 +27,7 @@ public class TestMancanti {
 		filter.setInputFormat(data);
 		cpu = Filter.useFilter(data, filter);
 		
-	    String s = "/DilcaTestSophia/src/main/java/Test/mushroom.arff";
+	    String s = "DilcaTestSophia/src/main/java/Test/mushroom.arff";
 	    int[] classe = new int[0];
 	    classe = BalloonNMISoloDilcaTestSuClasseDataset.loadArffClasse(s);
 	    double epsilon = 0.0;
