@@ -670,14 +670,14 @@ public class TestMancanti {
 	
 	public static void PostOperativeTest() throws Exception {
 		Instances cpu = null;
-		DataSource source = new DataSource("C:\\\\Users\\\\Simone\\\\eclipse-workspace\\\\DilcaDistanceDiffPriv\\\\src\\\\main\\\\java\\\\Test\\\\postoperative-patient-data.arff");
+		DataSource source = new DataSource("../src/main/java/Test/postoperative-patient-data.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
 		filter.setAttributeIndices(""+(data.classIndex()+1));
 		filter.setInputFormat(data);
 		cpu = Filter.useFilter(data, filter);
-	    String s = "C:\\\\Users\\\\Simone\\\\eclipse-workspace\\\\DilcaDistanceDiffPriv\\\\src\\\\main\\\\java\\\\Test\\\\postoperative-patient-data.arff";
+	    String s = "../src/main/java/Test/postoperative-patient-data.arff";
 	    int[] classe = new int[0];
 	    classe = BalloonNMISoloDilcaTestSuClasseDataset.loadArffClasse(s);
 	    double epsilon = 0.0;
@@ -686,7 +686,7 @@ public class TestMancanti {
 	    for(int sig = 0; sig<10;sig++) {
 	    	sigma = sigma + 0.1;
 	    	epsilon = 0.0;
-	    	FileWriter writer1 = new FileWriter("C:\\\\Users\\\\Simone\\\\Desktop\\PostOpMatrIniMean1Sigma"+sigma+"ARI.txt", true);
+	    	FileWriter writer1 = new FileWriter("../../postoperative/PostOpMatrIniMean1Sigma"+sigma+"ARI.txt", true);
 	    	for(int ciclo = 1; ciclo<50; ciclo++) {
 			rand.setSeed(11235813);
 			epsilon = epsilon+0.1;
@@ -696,7 +696,7 @@ public class TestMancanti {
 				DilcaDistanceContTableMean dd = new DilcaDistanceContTableMean(epsilon/(binomialCoeff(cpu.numAttributes(), 2)),sigma, rand.nextLong());
 				System.out.println("*******************************************");
 				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("C:\\Users\\Simone\\eclipse-workspace\\DilcaDistanceDiffPriv\\src\\main\\java\\Test\\postoperative-patient-data.arff");
+				BalloonNMISoloDilcaTestSuClasseDataset.loadArff(s);
 				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 3);
 				AdjustedRandIndex nnn = new AdjustedRandIndex();
 				double value = nnn.measure(classe, classCluster);
@@ -715,7 +715,7 @@ public class TestMancanti {
 	    for(int sig = 0; sig<10;sig++) {
 	    	sigma = sigma + 0.1;
 	    	epsilon = 0.0;
-	    FileWriter writer1 = new FileWriter("C:\\\\Users\\\\Simone\\\\Desktop\\PostOpSUFinalDistMean1Sigma"+sigma+"ARI.txt", true);
+	    FileWriter writer1 = new FileWriter("../../postoperative/PostOpSUFinalDistMean1Sigma"+sigma+"ARI.txt", true);
 		for(int ciclo = 1; ciclo<50; ciclo++) {
 			rand.setSeed(11235813);
 			epsilon = epsilon+0.1;
@@ -725,7 +725,7 @@ public class TestMancanti {
 				DilcaDistanceDiffPrivMeanWithFinalDistance dd = new DilcaDistanceDiffPrivMeanWithFinalDistance((0.5*epsilon/(cpu.numAttributes()+binomialCoeff(cpu.numAttributes(), 2))),(0.5*epsilon/(binomialCoeff(cpu.numAttributes(), 2))),sigma, rand.nextLong());
 				System.out.println("*******************************************");
 				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff("C:\\\\Users\\\\Simone\\\\eclipse-workspace\\\\DilcaDistanceDiffPriv\\\\src\\\\main\\\\java\\\\Test\\\\postoperative-patient-data.arff");
+				BalloonNMISoloDilcaTestSuClasseDataset.loadArff(s);
 				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 3);
 				AdjustedRandIndex nnn = new AdjustedRandIndex();
 				double value = nnn.measure(classe, classCluster);
