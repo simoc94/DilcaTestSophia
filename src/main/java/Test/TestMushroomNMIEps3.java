@@ -23,19 +23,20 @@ public class TestMushroomNMIEps3 {
 	public static void main(String[]args) throws Exception {
 		
 		Instances cpu = null;
-		DataSource source = new DataSource("../src/main/java/Test/mushroom.arff");
+		DataSource source = new DataSource("C:\\\\Users\\\\Simone\\\\eclipse-workspace\\\\DilcaDistanceDiffPriv\\\\src\\\\main\\\\java\\\\Test\\\\mushroom.arff");
 		Instances data = source.getDataSet();
 		data.setClassIndex(data.numAttributes()-1);
 		Remove filter = new Remove();
 		filter.setAttributeIndices(""+(data.classIndex()+1));
 		filter.setInputFormat(data);
 		cpu = Filter.useFilter(data, filter);
-        String s = "../src/main/java/Test/mushroom.arff";
+        String s = "C:\\\\\\\\Users\\\\\\\\Simone\\\\\\\\eclipse-workspace\\\\\\\\DilcaDistanceDiffPriv\\\\\\\\src\\\\\\\\main\\\\\\\\java\\\\\\\\Test\\\\\\\\mushroom.arff";
         int[] classe = new int[0];
         classe = BalloonNMISoloDilcaTestSuClasseDataset.loadArffClasse(s);
         double epsilon = 3.0;
         Random rand =new Random();
         double sigma = 0.0;
+        /*
         for(int sig = 0; sig<10;sig++) {
         	sigma = sigma + 0.1;
         	FileWriter writer1 = new FileWriter("../../test_mushroom_nmi_matrini_mean/MushroomMatrIniMeanSigmaNMI"+sigma+"Epsilon3.txt", true);
@@ -60,12 +61,54 @@ public class TestMushroomNMIEps3 {
         }
         
         sigma = 0.0;
-        for(int sig = 0; sig<10;sig++) {
+        */
+        
+        
+        FileWriter writer1 = new FileWriter("C:\\Users\\Simone\\Desktop\\MushroomMatrIniRRNMIEps3.txt", true);
+		rand.setSeed(11235813);
+		double corr = 0;
+		int counter = 0;
+		for(int i = 0; i<20;i++) {
+			DilcaDistanceContTableRR dd = new DilcaDistanceContTableRR(epsilon/(binomialCoeff(cpu.numAttributes(), 2)), rand.nextLong());
+			System.out.println("*******************************************");
+			BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
+			BalloonNMISoloDilcaTestSuClasseDataset.loadArff(s);
+			int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
+			NormalizedMutualInformation nnn = new NormalizedMutualInformation(Method.SUM);
+			double value = nnn.measure(classe, classCluster);
+			corr = corr+value;
+			counter++;
+		}
+		double result = (double) corr/counter;
+		writer1.write("Epsilon: "+epsilon+", NMI: "+result+";   ");		
+		writer1.close();
+		
+		FileWriter writer2 = new FileWriter("C:\\\\Users\\\\Simone\\\\Desktop\\\\MushroomSUFinalDistRRNMIEps3.txt", true);
+		rand.setSeed(11235813);
+		double corr1 = 0;
+		int counter1 = 0;
+		for(int i = 0; i<20;i++) {
+			DilcaDistanceDiffPrivRRWithFinalDistance dd = new DilcaDistanceDiffPrivRRWithFinalDistance((0.5*epsilon/(cpu.numAttributes()+binomialCoeff(cpu.numAttributes(), 2))),(0.5*epsilon/(binomialCoeff(cpu.numAttributes(), 2))), rand.nextLong());
+			System.out.println("*******************************************");
+			BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
+			BalloonNMISoloDilcaTestSuClasseDataset.loadArff(s);
+			int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
+			NormalizedMutualInformation nnn = new NormalizedMutualInformation(Method.SUM);
+			double value = nnn.measure(classe, classCluster);
+			corr1 = corr1+value;
+			counter1++;
+		}
+		double result1 = (double) corr1/counter1;
+		writer2.write("Epsilon: "+epsilon+", NMI: "+result1+";   ");		
+		writer2.close();
+		
+		
+		for(int sig = 0; sig<10;sig++) {
         	sigma = sigma + 0.1;
-        	FileWriter writer1 = new FileWriter("../../test_mushroom_nmi_SU_mean/MushroomSUMeanSigmaNMI"+sigma+"Epsilon3.txt", true);
+        	FileWriter writer3 = new FileWriter("C:\\\\Users\\\\Simone\\\\Desktop\\\\MushroomSUMeanSigmaNMI"+sigma+"Epsilon3.txt", true);
 			rand.setSeed(11235813);
-			double corr = 0;
-			int counter = 0;
+			double corr2 = 0;
+			int counter2 = 0;
 			for(int i = 0; i<20;i++) {
 				DilcaDistanceDiffPrivMeanWithFinalDistance dd = new DilcaDistanceDiffPrivMeanWithFinalDistance((0.5*epsilon/(cpu.numAttributes()+binomialCoeff(cpu.numAttributes(), 2))),(0.5*epsilon/(binomialCoeff(cpu.numAttributes(), 2))),sigma, rand.nextLong());
 				System.out.println("*******************************************");
@@ -74,58 +117,15 @@ public class TestMushroomNMIEps3 {
 				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
 				NormalizedMutualInformation nnn = new NormalizedMutualInformation(Method.SUM);
 				double value = nnn.measure(classe, classCluster);
-				corr = corr+value;
-				counter++;
+				corr2 = corr2+value;
+				counter2++;
 			}
-			double result = (double) corr/counter;
-			writer1.write("Epsilon: "+epsilon+", sigma:"+sigma+ ", NMI: "+result+";   ");		
-			writer1.close();
+			double result2 = (double) corr2/counter2;
+			writer3.write("Epsilon: "+epsilon+", sigma:"+sigma+ ", NMI: "+result2+";   ");		
+			writer3.close();
 			
         }
         
-        
-        FileWriter writer1 = new FileWriter("../../test_mushroom_nmi_matrini_rr/MushroomMatrIniRRNMIEps3.txt", true);
-		for(int ciclo = 1; ciclo<10; ciclo++) {
-			rand.setSeed(11235813);
-			double corr = 0;
-			int counter = 0;
-			for(int i = 0; i<20;i++) {
-				DilcaDistanceContTableRR dd = new DilcaDistanceContTableRR(epsilon/(binomialCoeff(cpu.numAttributes(), 2)), rand.nextLong());
-				System.out.println("*******************************************");
-				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff(s);
-				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
-				NormalizedMutualInformation nnn = new NormalizedMutualInformation(Method.SUM);
-				double value = nnn.measure(classe, classCluster);
-				corr = corr+value;
-				counter++;
-			}
-			double result = (double) corr/counter;
-			writer1.write("Epsilon: "+epsilon+", NMI: "+result+";   ");		
-		}
-		writer1.close();
-		
-		FileWriter writer2 = new FileWriter("../../test_mushroom_nmi_SU_rr/MushroomSUFinalDistRRNMIEps3.txt", true);
-		for(int ciclo = 1; ciclo<10; ciclo++) {
-			rand.setSeed(11235813);
-			double corr = 0;
-			int counter = 0;
-			for(int i = 0; i<20;i++) {
-				DilcaDistanceDiffPrivRRWithFinalDistance dd = new DilcaDistanceDiffPrivRRWithFinalDistance((0.5*epsilon/(cpu.numAttributes()+binomialCoeff(cpu.numAttributes(), 2))),(0.5*epsilon/(binomialCoeff(cpu.numAttributes(), 2))), rand.nextLong());
-				System.out.println("*******************************************");
-				BalloonNMISoloDilcaTestSuClasseDataset clusterDilca = new BalloonNMISoloDilcaTestSuClasseDataset();
-				BalloonNMISoloDilcaTestSuClasseDataset.loadArff(s);
-				int[] classCluster = BalloonNMISoloDilcaTestSuClasseDataset.clusterData(dd, 2);
-				NormalizedMutualInformation nnn = new NormalizedMutualInformation(Method.SUM);
-				double value = nnn.measure(classe, classCluster);
-				corr = corr+value;
-				counter++;
-			}
-			double result = (double) corr/counter;
-			writer2.write("Epsilon: "+epsilon+", NMI: "+result+";   ");		
-		}
-		writer2.close();
-		
 		 
 	}
 
